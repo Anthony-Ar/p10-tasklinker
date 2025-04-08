@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des employés{% endblock %}
+
+{% block header %}<h1>Équipe</h1>{% endblock %}
+
+{% block body %}
+    <table id="team-container">
+        <thead>
+        <tr>
+            <th>Prénom, Nom</th>
+            <th>Statut</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>
+                    <div class="employee-infos">
+                        <div class="employee-avatar">
+                            {{ user.firstName|first }}{{ user.lastName|first }}
+                        </div>
+                        <div class="employee-coords">
+                            <strong>{{ user}}</strong>
+                            <span>{{ user.email }}</span>
+                        </div>
+                    </div>
+                </td>
+                <td>{{ user.contrat }}</td>
+                <td>
+                    <a class="button button-edit-team" href="{{ path('app_user_edit', {id: user.id}) }}">
+                        Éditer
+                    </a>
+                    <a class="delete-team" href="{{ path('app_user_delete', {id: user.id}) }}" onclick="return confirm('Confirmez cette action');">
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

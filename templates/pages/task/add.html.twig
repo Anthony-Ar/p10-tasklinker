@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une tâche{% endblock %}
+
+{% block header %}<h1>Créer une tâche</h1>{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+
+    <div class="flex-form">
+        {{ form_row(form.deadline) }}
+        {{ form_row(form.status) }}
+    </div>
+
+    {{ form_row(form.user) }}
+
+    <br>
+
+    <button class="button button-submit">Ajouter</button>
+    {{ form_end(form) }}
+{% endblock %}

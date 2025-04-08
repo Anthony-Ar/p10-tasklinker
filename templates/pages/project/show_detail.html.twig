@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.name }}{% endblock %}
+
+{% block header %}
+    <div class="flex-header">
+        <h1>{{ project.name }}</h1>
+        <div class="user-list">
+            {% for user in project.user %}
+                <div class="avatar">{{ user.firstname|first }}{{ user.lastname|first }}</div>
+            {% endfor %}
+        </div>
+        <a class="button" href="{{ path('app_project_edit', {id: project.id}) }}">Modifier</a>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div id="tasks-container">
+        {% for statut in status %}
+            <div class="task-column">
+                <h2>{{ statut.name }}</h2>
+                <div class="tasks-list">
+                    {% for task in project.tasks|filter(task => task.status == statut) %}
+                    <a class="task" href="{{ path('app_task_edit', {id: task.id}) }}">
+                        <h3>{{ task.name }}</h3>
+                        <p>{{ task.description }}</p>
+                        {% if task.user or task.deadline %}
+                        <div class="task-infos">
+                            {% if task.deadline %}
+                            <div class="task-deadline">
+                                <i class="fa-regular fa-calendar"></i> {{ task.deadline|date('d/m/Y') }}
+                            </div>
+                            {% endif %}
+                            {% if task.user %}
+                            <div class="mini-user">
+                                {{ task.user.firstname|first }}{{ task.user.lastname|first }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </a>
+                    {% endfor %}
+                    <a href="{{ path('app_task_add', {id: project.id}) }}" class="task-add">
+                        + Ajouter une tâche
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

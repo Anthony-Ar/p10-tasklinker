@@ -1,0 +1,23 @@
+<nav>
+    <a href="{{ path('app_projects_show') }}" id="logo">
+        <img src="{{ asset('assets/img/logo.png') }}" alt="Logo TaskLinker" />
+    </a>
+    <ul id="main-menu">
+        <li
+            {% if app.request.get('_route') starts with 'app_project'
+                or app.request.get('_route') starts with 'app_task' %}
+                class="active"
+            {% endif %}>
+            <a href="{{ path('app_projects_show') }}">
+                <i class="fa-solid fa-list-check"></i> Projets
+            </a>
+        </li>
+        <li {% if app.request.get('_route') starts with 'app_user' %}
+                class="active"
+            {% endif %}>
+            <a href="{{ path('app_users_show') }}">
+                <i class="fa-regular fa-user"></i> Équipe
+            </a>
+        </li>
+    </ul>
+</nav>

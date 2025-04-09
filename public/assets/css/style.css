@@ -556,6 +556,17 @@ section#wrapper-container {
     background-repeat: repeat;
 }
 
+#current-user {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+
+    .avatar {
+        background-color: #FFFFFF;
+        border-color: #1C5B50;
+    }
+}
+
 @media (max-width: 992px) {
     nav {
         width: 150px;

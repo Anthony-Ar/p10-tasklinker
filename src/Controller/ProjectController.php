@@ -20,7 +20,7 @@ final class ProjectController extends AbstractController
      * Affiche la liste des projets
      * @return Response
      */
-    #[Route('/', name: 'app_projects_show')]
+    #[Route('/project', name: 'app_projects_show')]
     public function showProjects(): Response
     {
         return $this->render('pages/project/show.html.twig', [

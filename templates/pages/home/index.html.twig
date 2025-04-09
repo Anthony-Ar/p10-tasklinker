@@ -1,0 +1,18 @@
+{% extends 'guest_layout.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <section id="wrapper-container">
+        <h1>Bienvenue sur TaskLinker</h1>
+        <h2>Commencez dès maintenant - gratuitement </h2>
+
+        <h3>Vous avez déjà un compte ?</h3>
+
+        <a href="#" class="button button-guest dark-green">Se connecter</a>
+
+        <p>ou</p>
+
+        <a href="{{ path('app_register') }}" class="button button-guest m-0">S'inscrire</a>
+    </section>
+{% endblock %}

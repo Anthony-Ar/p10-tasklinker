@@ -21,7 +21,9 @@
 </head>
 <body class="guest-bg">
 <main>
-    <img class="guest-logo" src="{{ asset('assets/img/logo.png') }}" alt="Logo TaskLinker" />
+    <a href="{{ path('app_home') }}">
+        <img class="guest-logo" src="{{ asset('assets/img/logo.png') }}" alt="Logo TaskLinker" />
+    </a>
     {% block body %}{% endblock %}
 </main>
 </body>

@@ -489,7 +489,7 @@ form .select2-container--default .select2-selection--multiple .select2-selection
 
 /** Custom css */
 section#wrapper-container {
-    padding: 3.7rem 14.3rem;
+    padding: 3.7rem;
     width: 100%;
     max-width: 710px;
     background-color: #4D8077;
@@ -508,6 +508,33 @@ section#wrapper-container {
     a {
         margin-top: 1.7rem;
         color: #FFFFFF;
+    }
+
+    h2 {
+        font-weight: 400;
+        font-size: 22px;
+    }
+
+    h3 {
+        font-weight: 400;
+        font-size: 18px;
+    }
+
+    .button {
+        color: #4D8077;
+    }
+
+    .dark-green {
+        background-color: #1C5B50;
+        color: #FFFFFF;
+    }
+
+    .button-guest {
+        padding: 25px 60px;
+    }
+
+    .m-0 {
+        margin: 0;
     }
 }
 

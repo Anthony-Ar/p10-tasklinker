@@ -14,6 +14,13 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class RegistrationController extends AbstractController
 {
+    /**
+     * Inscription utilisateur
+     * @param Request $request
+     * @param UserPasswordHasherInterface $userPasswordHasher
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/register', name: 'app_register')]
     public function register(
         Request $request,
@@ -28,7 +35,7 @@ class RegistrationController extends AbstractController
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
-            $user->setContrat('Inconnu')
+            $user->setContrat('CDI')
                 ->setContratStartDate(new DateTime());
 
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));

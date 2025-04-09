@@ -1,0 +1,24 @@
+{% extends 'guest_layout.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <section id="wrapper-container">
+        <h1>S'inscrire</h1>
+
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.lastName) }}
+        {{ form_row(registrationForm.firstName) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword) }}
+
+        <br>
+
+        <button class="button button-submit">Continuer</button>
+        {{ form_end(registrationForm) }}
+
+        <a href="#">Vous avez déjà un compte ?</a>
+    </section>
+{% endblock %}

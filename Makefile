@@ -24,9 +24,6 @@ build: ## Builds the Docker images
 up: ## Start the docker hub
 	@$(DOCKER_COMP) up --remove-orphans
 
-up --tls:
-	@$(DOCKER_COMP) up
-
 start: build up ## Build and start the containers
 
 down: ## Stop the docker hub
@@ -70,6 +67,9 @@ migration: ## Génère le fichier de migration Symfony
 
 domimi: ## Éxécute toutes les migrations en attente
 	@$(SYMFONY) do:mi:mi
+
+dsc: ## Création du schéma de la base de données
+	@$(SYMFONY) d:s:c
 
 dfl: ## Chargement des DataFixtures présentes sur l'application
 	@$(SYMFONY) d:f:l

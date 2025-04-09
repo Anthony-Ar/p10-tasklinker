@@ -10,6 +10,7 @@
         <tr>
             <th>Prénom, Nom</th>
             <th>Statut</th>
+            <th>Rôle</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -22,17 +23,25 @@
                             {{ user.firstName|first }}{{ user.lastName|first }}
                         </div>
                         <div class="employee-coords">
-                            <strong>{{ user}}</strong>
+                            <strong>{{ user }}</strong>
                             <span>{{ user.email }}</span>
                         </div>
                     </div>
                 </td>
                 <td>{{ user.contrat }}</td>
                 <td>
+                    {% if "ROLE_ADMIN" in user.roles %}
+                        Chef de projet
+                    {% else %}
+                        Collaborateur
+                    {% endif %}
+                </td>
+                <td>
                     <a class="button button-edit-team" href="{{ path('app_user_edit', {id: user.id}) }}">
                         Éditer
                     </a>
-                    <a class="delete-team" href="{{ path('app_user_delete', {id: user.id}) }}" onclick="return confirm('Confirmez cette action');">
+                    <a class="delete-team" href="{{ path('app_user_delete', {id: user.id}) }}"
+                       onclick="return confirm('Confirmez cette action');">
                         Supprimer
                     </a>
                 </td>

@@ -24,7 +24,9 @@
         {% include 'partials/nav.html.twig' %}
         <main>
             <header>
-                <div id="current-user"></div>
+                <div id="current-user">
+                    <div class="avatar">{{ app.user.firstname|first }}{{ app.user.lastname|first }}</div>
+                </div>
                 <div id="title-page">
                     {% block header %}{% endblock %}
                 </div>

@@ -1,0 +1,31 @@
+{% extends 'guest_layout.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <section id="wrapper-container">
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <h1>Se connecter</h1>
+            <label for="username">Email</label>
+            <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control"
+                   autocomplete="email" required autofocus>
+            <label for="password">Mot de passe</label>
+            <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password"
+                   required>
+
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+
+            <br>
+
+            <button class="button button-submit">Continuer</button>
+        </form>
+
+        <a href="{{ path('app_register') }}">Pas de compte ? S'inscrire</a>
+    </section>
+{% endblock %}

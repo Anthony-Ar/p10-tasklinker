@@ -524,6 +524,10 @@ section#wrapper-container {
         color: #4D8077;
     }
 
+    .button:hover {
+        cursor: pointer;
+    }
+
     .dark-green {
         background-color: #1C5B50;
         color: #FFFFFF;
@@ -531,6 +535,10 @@ section#wrapper-container {
 
     .button-guest {
         padding: 25px 60px;
+    }
+
+    .button-submit {
+        color: #FFFFFF;
     }
 
     .m-0 {

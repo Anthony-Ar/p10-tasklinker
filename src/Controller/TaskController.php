@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Project;
 use App\Entity\Task;
 use App\Form\TaskType;
+use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,8 +15,11 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class TaskController extends AbstractController
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager)
-    {}
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly TaskRepository $taskRepository,
+    ) {
+    }
 
     /**
      * Ajoute une nouvelle tâche à un projet
@@ -25,11 +29,11 @@ final class TaskController extends AbstractController
      */
     #[Route('/project/{id}/add-task', name: 'app_task_add')]
     #[IsGranted('access_project', 'id')]
-    public function addTask(Request $request, int $id): Response
+    public function addTask(Request $request, int $id) : Response
     {
         $project = $this->entityManager->getRepository(Project::class)->find($id);
 
-        if (!$project || !$project->isActive()) {
+        if (!$project) {
             return $this->redirectToRoute('app_projects_show');
         }
 
@@ -59,9 +63,9 @@ final class TaskController extends AbstractController
      */
     #[Route('/task/{id}/edit', name: 'app_task_edit')]
     #[IsGranted('access_task', 'id')]
-    public function editTask(Request $request, int $id): Response
+    public function editTask(Request $request, int $id) : Response
     {
-        $task = $this->entityManager->getRepository(Task::class)->find($id);
+        $task = $this->taskRepository->find($id);
 
         if (!$task) {
             return $this->redirectToRoute('app_projects_show');
@@ -92,11 +96,11 @@ final class TaskController extends AbstractController
      */
     #[Route('/task/{id}/delete', name: 'app_task_delete')]
     #[IsGranted('access_task', 'id')]
-    public function deleteTask(int $id): Response
+    public function deleteTask(int $id) : Response
     {
-        $task = $this->entityManager->getRepository(Task::class)->find($id);
+        $task = $this->taskRepository->find($id);
 
-        if($task) {
+        if ($task) {
             $project = $task->getProject()->getId();
 
             $this->entityManager->remove($task);

@@ -50,7 +50,7 @@ class AccessVoter extends Voter implements CacheableVoterInterface
     {
         $task = $this->taskRepository->find($id);
 
-        if(!$task || !$task->getProject()->getUser()->contains($user)) {
+        if(!$task || !$task->getProject()->isActive() || !$task->getProject()->getUser()->contains($user)) {
             return false;
         }
 
@@ -61,7 +61,7 @@ class AccessVoter extends Voter implements CacheableVoterInterface
     {
         $project = $this->projectRepository->find($id);
 
-        if(!$project || !$project->getUser()->contains($user)) {
+        if(!$project || !$project->isActive() || !$project->getUser()->contains($user)) {
             return false;
         }
 

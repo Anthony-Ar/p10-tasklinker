@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class TaskController extends AbstractController
 {
@@ -23,6 +24,7 @@ final class TaskController extends AbstractController
      * @return Response
      */
     #[Route('/project/{id}/add-task', name: 'app_task_add')]
+    #[IsGranted('access_project', 'id')]
     public function addTask(Request $request, int $id): Response
     {
         $project = $this->entityManager->getRepository(Project::class)->find($id);
@@ -55,7 +57,8 @@ final class TaskController extends AbstractController
      * @param int $id
      * @return Response
      */
-    #[Route('/task/edit/{id}', name: 'app_task_edit')]
+    #[Route('/task/{id}/edit', name: 'app_task_edit')]
+    #[IsGranted('access_task', 'id')]
     public function editTask(Request $request, int $id): Response
     {
         $task = $this->entityManager->getRepository(Task::class)->find($id);
@@ -88,6 +91,7 @@ final class TaskController extends AbstractController
      * @return Response
      */
     #[Route('/task/{id}/delete', name: 'app_task_delete')]
+    #[IsGranted('access_task', 'id')]
     public function deleteTask(int $id): Response
     {
         $task = $this->entityManager->getRepository(Task::class)->find($id);

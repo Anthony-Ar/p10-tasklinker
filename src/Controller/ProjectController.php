@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class ProjectController extends AbstractController
 {
@@ -34,6 +35,7 @@ final class ProjectController extends AbstractController
      * @return Response
      */
     #[Route('/project/{id}', name: 'app_project_show', requirements: ['id' => '\d+'])]
+    #[IsGranted('access_project', 'id')]
     public function showProject(int $id): Response
     {
         $project = $this->entityManager->getRepository(Project::class)->find($id);
@@ -54,6 +56,7 @@ final class ProjectController extends AbstractController
      * @return Response
      */
     #[Route('/project/add', name: 'app_project_add')]
+    #[IsGranted('ROLE_ADMIN')]
     public function addProject(Request $request): Response
     {
         $project = new Project();
@@ -80,6 +83,7 @@ final class ProjectController extends AbstractController
      * @return Response
      */
     #[Route('/project/{id}/edit', name: 'app_project_edit')]
+    #[IsGranted('ROLE_ADMIN')]
     public function editProject(Request $request, int $id): Response
     {
         $project = $this->entityManager->getRepository(Project::class)->find($id);
@@ -110,6 +114,7 @@ final class ProjectController extends AbstractController
      * @return Response
      */
     #[Route('/project/{id}/delete', name: 'app_project_delete')]
+    #[IsGranted('ROLE_ADMIN')]
     public function deleteProject(int $id): Response
     {
         $project = $this->entityManager->getRepository(Project::class)->find($id);
